@@ -18,6 +18,9 @@ esac
         exit 0
     fi
 
+    # Unlock login keychain for codesigning certificate.
+    security unlock-keychain -p 'Vbam3***' login.keychain
+
     cd ~
     ~/source/repos/nightly-visualboyadvance-m/tools/osx/builder
 
