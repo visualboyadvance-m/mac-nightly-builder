@@ -13,13 +13,14 @@ esac
 {
     cd ~/source/repos/nightly-visualboyadvance-m
     git fetch --all --prune
-    if [ -z "$force" ] && ! git status | grep -q '^Your branch is up to date with'; then
+    if [ -z "$force" ] && git status | grep -q '^Your branch is up to date with'; then
         echo 'INFO: No changes to build.'
         exit 0
     fi
+    git pull --rebase
 
     # Unlock login keychain for codesigning certificate.
-    security unlock-keychain -p 'Vbam3***' login.keychain
+    security unlock-keychain -p 'Vbam3***' login.keychain || :
 
     cd ~
     ~/source/repos/nightly-visualboyadvance-m/tools/osx/builder
