@@ -1,4 +1,4 @@
-#!/usr/local/bin/bash
+#!/usr/local/bin/reattach-to-user-namespace /usr/local/bin/bash
 
 set -e
 
