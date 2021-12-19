@@ -26,8 +26,7 @@ esac
 
     sources_changed=$(
         git diff --name-only "${head}..${current}" \
-            | grep -E 'cmake|CMake|\.(c|cpp|h|in|xrc|xml|rc|cmd|xpm|ico|icns|png|svg)$' \
-            | wc -l
+            | grep -cE 'cmake|CMake|\.(c|cpp|h|in|xrc|xml|rc|cmd|xpm|ico|icns|png|svg)$' \
     )
 
     # Write date and time for beginning of check/build.
@@ -54,7 +53,7 @@ esac
 
     cd ~/nightly-stage
     for z in *.zip; do
-        printf "%s\n%s\n" "put $z" "chmod 664 $z" | sftp sftpuser@posixsh.org:nightly.vba-m.com/
+        printf '%s\n%s\n' "put $z" "chmod 664 $z" | sftp sftpuser@posixsh.org:nightly.vba-m.com/
     done
 
 } 2>&1 | tee -a ~/logs/builder.log
