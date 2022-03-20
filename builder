@@ -26,7 +26,7 @@ esac
 
     sources_changed=$(
         git diff --name-only "${head}..${current}" \
-            | grep -cE 'cmake|CMake|\.(c|cpp|h|in|xrc|xml|rc|cmd|xpm|ico|icns|png|svg)$' \
+            | grep -cE 'cmake|CMake|\.(c|cpp|h|in|xrc|xml|rc|cmd|xpm|ico|icns|png|svg)$' || : \
     )
 
     # Write date and time for beginning of check/build.
