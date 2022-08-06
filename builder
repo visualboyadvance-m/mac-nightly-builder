@@ -44,6 +44,11 @@ esac
     cd ~
     ~/source/repos/nightly-visualboyadvance-m/tools/osx/builder
 
+    # Reset the .pot file after build, it can block later pulls.
+    cd ~/source/repos/nightly-visualboyadvance-m
+    git checkout -f HEAD -- po/wxvbam/wxvbam.pot
+
+    cd ~
     rm -rf ~/nightly-stage
     mkdir -p ~/nightly-stage
 
