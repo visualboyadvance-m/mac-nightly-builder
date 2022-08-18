@@ -29,10 +29,15 @@ esac
             | grep -cE 'cmake|CMake|\.(c|cpp|h|in|xrc|xml|rc|cmd|xpm|ico|icns|png|svg)$' || : \
     )
 
+    translations_changed=$(
+        git diff --name-only "${head}..${current}" \
+            | grep -cE 'cmake|CMake|\.po$' || : \
+    )
+
     # Write date and time for beginning of check/build.
     date
 
-    if [ -z "$force" ] && [ "$sources_changed" -eq 0 ]; then
+    if [ -z "$force" ] && [ "$sources_changed" -eq 0 ] && [ "$translations_changed" -eq 0 ]; then
         echo 'INFO: No changes to build.'
         exit 0
     fi
