@@ -3,8 +3,12 @@
 set -e
 
 unset LANG LC_COLLATE LC_CTYPE LC_MESSAGES LC_MONETARY LC_NUMERIC LC_TIME LC_ALL
-export LANG=C
+export LC_ALL=C
 export TZ=UTC
+
+export BUILDER_CHECKOUT=$HOME/source/repos/mac-builder-visualboyadvance-m
+export CHECKOUT=$HOME/source/repos/nightly-visualboyadvance-m
+export BUILD_ROOT_SUFFIX=-nightly
 
 mkdir -p ~/logs
 
@@ -17,7 +21,7 @@ esac
 {
     date
 
-    cd ~/source/repos/nightly-visualboyadvance-m
+    cd "$CHECKOUT"
 
     git fetch --all --prune
 
@@ -44,21 +48,21 @@ esac
     git pull --rebase
 
     # Unlock login keychain for codesigning certificate.
-    security unlock-keychain -p 'Vbam3***' login.keychain || :
+    security unlock-keychain -p "$(cat ~/.login-keychain-password)" login.keychain || :
 
     cd ~
-    ~/source/repos/nightly-visualboyadvance-m/tools/osx/builder
+    $BUILDER_CHECKOUT/tools/macOS/builder
 
     # Reset the .pot file after build, it can block later pulls.
-    cd ~/source/repos/nightly-visualboyadvance-m
+    cd "$CHECKOUT"
     git checkout -f HEAD -- po/wxvbam/wxvbam.pot
 
     cd ~
     rm -rf ~/nightly-stage
     mkdir -p ~/nightly-stage
 
-    cp ~/vbam-build-mac-64bit/project/release/visualboyadvance-m-Mac-x86_64.zip \
-        ~/vbam-build-mac-64bit/project/debug/visualboyadvance-m-Mac-x86_64-debug.zip \
+    cp ~/"vbam-build-mac-64bit$BUILD_ROOT_SUFFIX"/project/release/visualboyadvance-m-Mac-x86_64.zip \
+        ~/"vbam-build-mac-64bit$BUILD_ROOT_SUFFIX"/project/debug/visualboyadvance-m-Mac-x86_64-debug.zip \
         ~/nightly-stage
 
     cd ~/nightly-stage
