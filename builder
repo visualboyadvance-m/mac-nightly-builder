@@ -50,6 +50,9 @@ esac
     # Unlock login keychain for codesigning certificate.
     security unlock-keychain -p "$(cat ~/.login-keychain-password)" login.keychain || :
 
+    cd "$BUILDER_CHECKOUT"
+    git pull --rebase
+
     cd ~
     $BUILDER_CHECKOUT/tools/macOS/builder
 
