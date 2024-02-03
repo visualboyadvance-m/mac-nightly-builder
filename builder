@@ -70,7 +70,7 @@ esac
 
     cd ~/nightly-stage
     for z in *.zip; do
-        printf '%s\n%s\n' "put $z" "chmod 664 $z" | sftp sftpuser@posixsh.org:nightly.vba-m.com/
+        printf '%s\n%s\n' "put $z" "chmod 664 $z" | sftp sftpuser@posixsh.org:nightly.visualboyadvance-m.org/
     done
 
 } 2>&1 | tee -a ~/logs/builder.log
