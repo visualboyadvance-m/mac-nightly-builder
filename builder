@@ -51,7 +51,10 @@ esac
     security unlock-keychain -p "$(cat ~/.login-keychain-password)" login.keychain || :
 
     cd "$BUILDER_CHECKOUT"
-    git pull --rebase
+#    git pull --rebase || :
+    git fetch --all --prune
+    git branch -D mac-arm64 || :
+    git checkout mac-arm64 || :
 
     cd ~
     $BUILDER_CHECKOUT/tools/macOS/builder
@@ -64,8 +67,8 @@ esac
     rm -rf ~/nightly-stage
     mkdir -p ~/nightly-stage
 
-    cp ~/"vbam-build-mac-64bit$BUILD_ROOT_SUFFIX"/project/release/visualboyadvance-m-Mac-x86_64.zip \
-        ~/"vbam-build-mac-64bit$BUILD_ROOT_SUFFIX"/project/debug/visualboyadvance-m-Mac-x86_64-debug.zip \
+    cp ~/"vbam-build-mac-64bit$BUILD_ROOT_SUFFIX"/project/release/visualboyadvance-m-Mac-*.zip \
+        ~/"vbam-build-mac-64bit$BUILD_ROOT_SUFFIX"/project/debug/visualboyadvance-m-Mac-*-debug.zip \
         ~/nightly-stage
 
     cd ~/nightly-stage
