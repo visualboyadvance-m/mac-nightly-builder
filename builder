@@ -10,6 +10,11 @@ export BUILDER_CHECKOUT=$HOME/source/repos/mac-builder-visualboyadvance-m
 export CHECKOUT=$HOME/source/repos/nightly-visualboyadvance-m
 export BUILD_ROOT_SUFFIX=-nightly
 
+arch=$(uname -m)
+if [ "$arch" = arm64 ]; then
+    arch=$(echo "$arch" | tr 'a-z' 'A-Z')
+fi
+
 mkdir -p ~/logs
 
 case "$1" in
@@ -69,8 +74,8 @@ esac
     rm -rf ~/nightly-stage
     mkdir -p ~/nightly-stage
 
-    cp ~/"vbam-build-mac-64bit$BUILD_ROOT_SUFFIX"/project/release/visualboyadvance-m-Mac-*.zip \
-        ~/"vbam-build-mac-64bit$BUILD_ROOT_SUFFIX"/project/debug/visualboyadvance-m-Mac-*-debug.zip \
+    cp ~/"vbam-build-mac-${arch}$BUILD_ROOT_SUFFIX"/project/release/visualboyadvance-m-Mac-*.zip \
+        ~/"vbam-build-mac-${arch}$BUILD_ROOT_SUFFIX"/project/debug/visualboyadvance-m-Mac-*-debug.zip \
         ~/nightly-stage
 
     cd ~/nightly-stage
