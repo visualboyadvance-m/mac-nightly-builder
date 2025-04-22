@@ -56,12 +56,7 @@ esac
     security unlock-keychain -p "$(cat ~/.login-keychain-password)" login.keychain || :
 
     cd "$BUILDER_CHECKOUT"
-#    git pull --rebase
-    git fetch --all --prune
-    git checkout master
     git pull --rebase
-    git branch -D mac-arm64
-    git checkout mac-arm64
 
     cd ~
     $BUILDER_CHECKOUT/tools/macOS/builder
