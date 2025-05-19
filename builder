@@ -60,6 +60,7 @@ esac
 
     cd ~
     $BUILDER_CHECKOUT/tools/macOS/builder
+    $BUILDER_CHECKOUT/tools/macOS/builder -intel
 
     # Reset the .pot file after build, it can block later pulls.
     cd "$CHECKOUT"
@@ -69,8 +70,8 @@ esac
     rm -rf ~/nightly-stage
     mkdir -p ~/nightly-stage
 
-    cp ~/"vbam-build-mac-${arch}$BUILD_ROOT_SUFFIX"/project/release/visualboyadvance-m-Mac-*.zip \
-        ~/"vbam-build-mac-${arch}$BUILD_ROOT_SUFFIX"/project/debug/visualboyadvance-m-Mac-*-debug.zip \
+    cp ~/vbam-build-mac-*$BUILD_ROOT_SUFFIX/project/release/visualboyadvance-m-Mac-*.zip \
+        ~/vbam-build-mac-*$BUILD_ROOT_SUFFIX/project/debug/visualboyadvance-m-Mac-*-debug.zip \
         ~/nightly-stage
 
     cd ~/nightly-stage
