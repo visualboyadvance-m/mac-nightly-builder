@@ -60,7 +60,10 @@ esac
 
     cd ~
     $BUILDER_CHECKOUT/tools/macOS/builder
-    $BUILDER_CHECKOUT/tools/macOS/builder -intel
+
+    if ! [ -f ~/.vbam_dont_build_intel ]; then
+        $BUILDER_CHECKOUT/tools/macOS/builder -intel
+    fi
 
     # Reset the .pot file after build, it can block later pulls.
     cd "$CHECKOUT"
