@@ -59,7 +59,10 @@ esac
     git pull --rebase
 
     cd ~
-    $BUILDER_CHECKOUT/tools/macOS/builder
+
+    if ! [ -f ~/.vbam_dont_build_arm64 ]; then
+        $BUILDER_CHECKOUT/tools/macOS/builder -arm64
+    fi
 
     if ! [ -f ~/.vbam_dont_build_intel ]; then
         $BUILDER_CHECKOUT/tools/macOS/builder -intel
