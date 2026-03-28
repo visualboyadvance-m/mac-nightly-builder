@@ -77,7 +77,6 @@ esac
     mkdir -p ~/nightly-stage
 
     cp ~/vbam-build-mac-*$BUILD_ROOT_SUFFIX/project/release/visualboyadvance-m-Mac-*.zip \
-        ~/vbam-build-mac-*$BUILD_ROOT_SUFFIX/project/debug/visualboyadvance-m-Mac-*-debug.zip \
         ~/nightly-stage
 
     cd ~/nightly-stage
