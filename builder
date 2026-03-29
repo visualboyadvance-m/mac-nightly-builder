@@ -61,11 +61,11 @@ esac
     cd ~
 
     if ! [ -f ~/.vbam_dont_build_arm64 ]; then
-        $BUILDER_CHECKOUT/tools/macOS/builder -arm64
+        /bin/zsh $BUILDER_CHECKOUT/tools/macOS/builder -arm64
     fi
 
     if ! [ -f ~/.vbam_dont_build_intel ]; then
-        $BUILDER_CHECKOUT/tools/macOS/builder -intel
+        /bin/zsh $BUILDER_CHECKOUT/tools/macOS/builder -intel
     fi
 
     # Reset the .pot file after build, it can block later pulls.
@@ -76,7 +76,7 @@ esac
     rm -rf ~/nightly-stage
     mkdir -p ~/nightly-stage
 
-    cp ~/vbam-build-mac-*$BUILD_ROOT_SUFFIX/project/release/visualboyadvance-m-Mac-*.zip \
+    cp ~/vbam-build-mac-*$BUILD_ROOT_SUFFIX/project/release/*.zip \
         ~/nightly-stage
 
     cd ~/nightly-stage
